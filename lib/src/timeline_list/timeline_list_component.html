@@ -1,0 +1,31 @@
+<!-- Components info: https://webdev.dartlang.org/components -->
+
+<p *ngIf="items3.isEmpty" class="nothing">
+  Nothing yet...
+</p>
+
+<ul>
+    <li *ngFor="let item of timelineElements">
+        <div class="timeline-element">
+            <div class="timeline-element-name">
+                begin: {{ item }}
+            </div>
+            <timeline-elem
+                    [grayLines]="grayLines"
+                    [grayDots]="grayDots"
+                    [stateNames]="stateNames"
+                    class="timeline-element-data">
+            </timeline-elem>
+        </div>
+    </li>
+</ul>
+
+<div *ngIf="items.isNotEmpty">
+  <ul>
+      <li *ngFor="let item of items; let i=index">
+        <span>
+            {{ item }}
+        </span>
+      </li>
+  </ul>
+</div>
