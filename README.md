@@ -1,7 +1,20 @@
-# isf_ng_qual_2019
+# isf-ng-qual-2019
 
-A web app that uses [AngularDart](https://webdev.dartlang.org/angular) and
-[AngularDart Components](https://webdev.dartlang.org/components).
+### Сборка и запуск
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+Начать сборку:
+```
+webdev build
+```
+
+Запустить приложение:
+```
+webdev serve
+```
+
+### Внутренее устройство
+Веб-приложение использует [AngularDart](https://webdev.dartlang.org/angular) и [AngularDart Components](https://webdev.dartlang.org/components)
+и основано на одном из шаблонов, доступных `stagehand` под [лицензией BSD](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+
+### Обратная связь
+[github.com/victorivanovspb/isf-ng-qual-2019/issues](https://github.com/victorivanovspb/isf-ng-qual-2019/issues)
