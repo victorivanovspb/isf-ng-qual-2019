@@ -1,0 +1,56 @@
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        version="1.1"
+        width="100%"
+        height="100%"
+        style="overflow: visible;">
+    <rect
+            *ngFor="let line of grayLines"
+            [attr.x]="line.beginPosition"
+            [attr.width]="line.endPosition"
+            y="50%"
+            height="2"
+            fill="#ccc">
+    </rect>
+    <rect
+            *ngFor="let dot of grayDots"
+            [attr.x]="dot.positionX"
+            y="50%"
+            height="5%"
+            width="3"
+            fill="#ccc">
+    </rect>
+    <text
+            *ngFor="let name of stateNames"
+            [attr.x]="name.shiftedPositionX"
+            y="38%"
+            fill="#777"
+            style="font-size: 0.8em;">
+        {{ name.name }}
+    </text>
+    <text
+            *ngFor="let ts of timestamps"
+            [attr.x]="ts.shiftedPositionX"
+            y="69%"
+            fill="#777"
+            style="font-size: 0.7em;">
+        {{ ts.time }}
+    </text>
+    <text
+            *ngFor="let ts of timestamps"
+            [attr.x]="ts.shiftedPositionX"
+            y="80%"
+            fill="#777"
+            style="font-size: 0.7em;">
+        {{ ts.date }}
+    </text>
+    <rect
+            *ngFor="let line of boldLines"
+            [attr.x]="line.beginPosition"
+            [attr.width]="line.endPosition"
+            y="50%"
+            height="2"
+            fill="#00abff">
+    </rect>
+</svg>

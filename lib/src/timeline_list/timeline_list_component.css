@@ -1,0 +1,45 @@
+ul {
+  list-style: none;
+  margin-top: 80px;
+  padding-left: 0;
+}
+
+li {
+  line-height: 3em;
+}
+
+li material-checkbox {
+  vertical-align: middle;
+}
+
+li material-fab {
+  float: right;
+  vertical-align: middle;
+}
+
+p.nothing {
+  color: #777;
+  text-align: center;
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+.timeline-element {
+  display: flex;
+}
+
+.timeline-element .timeline-element-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8em;
+  width: 150px;
+  color: #777;
+}
+
+.timeline-element .timeline-element-data {
+  width: 100%;
+}
+
