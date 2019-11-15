@@ -1,7 +1,10 @@
+//import 'dart:core';
 import 'package:angular/angular.dart';
-import '../timeline_base/vector_seg.dart';
-import '../timeline_base/vector_dot.dart';
-import '../timeline_base/vector_names.dart';
+import '../timeline_base/segment.dart';
+import '../timeline_base/dot.dart';
+import '../timeline_base/name.dart';
+import '../timeline_base/timeline.dart';
+import '../timeline_base/timestamp.dart';
 
 @Component(
   selector: 'timeline-elem',
@@ -14,16 +17,21 @@ import '../timeline_base/vector_names.dart';
   providers: [],
 )
 class TimelineElemComponent implements OnInit {
-  @Input() List<VectorSeg> grayLines;
-  @Input() List<VectorDot> grayDots;
-  @Input() List<VectorNames> stateNames;
+  @Input()
+  Timeline timeline;
+
+  List<Segment> grayLines;
+  List<Dot> grayDots;
+  List<Name> stateNames;
+  List<Segment> boldLines;
+  List<Timestamp> timestamps;
 
   @override
   Future<Null> ngOnInit() async {
-  }
-
-  void update(v) {
-    ;
-    //value = v;
+    grayLines = timeline.grayLines;
+    grayDots = timeline.grayDots;
+    stateNames = timeline.stateNames;
+    boldLines = timeline.boldLines;
+    timestamps = timeline.timestamps;
   }
 }

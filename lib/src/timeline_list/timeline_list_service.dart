@@ -1,36 +1,61 @@
 import 'dart:async';
 import 'package:angular/core.dart';
-import '../timeline_base/vector_seg.dart';
-import '../timeline_base/vector_dot.dart';
-import '../timeline_base/vector_names.dart';
+import '../timeline_base/segment.dart';
+import '../timeline_base/dot.dart';
+import '../timeline_base/name.dart';
+import '../timeline_base/timeline.dart';
+import '../timeline_base/timestamp.dart';
 
 @Injectable()
 class TimelineListService {
-  Future<List<VectorSeg>> getGrayLines() async {
-    List<VectorSeg> list = <VectorSeg>[];
-    list.add(VectorSeg('0%', '25%'));
-    list.add(VectorSeg('25%', '10%'));
-    list.add(VectorSeg('35%', '30%'));
-    list.add(VectorSeg('65%', '10%'));
-    list.add(VectorSeg('75%', '25%'));
+  Future<List<Segment>> getGrayLines() async {
+    List<Segment> list = <Segment>[];
+    list.add(Segment(0, 25));
+    list.add(Segment(25, 10));
+    list.add(Segment(35, 30));
+    list.add(Segment(65, 10));
+    list.add(Segment(75, 25));
     return list;
   }
-  Future<List<VectorDot>> getGrayDots() async {
-    List<VectorDot> list = <VectorDot>[];
-    list.add(VectorDot('25%'));
-    list.add(VectorDot('35%'));
-    list.add(VectorDot('65%'));
-    list.add(VectorDot('75%'));
-    list.add(VectorDot('100%'));
+  Future<List<Dot>> getGrayDots() async {
+    List<Dot> list = <Dot>[];
+    list.add(Dot(25));
+    list.add(Dot(35));
+    list.add(Dot(65));
+    list.add(Dot(75));
+    list.add(Dot(100));
     return list;
   }
-  Future<List<VectorNames>> getStateNames() async {
-    List<VectorNames> list = <VectorNames>[];
-    list.add(VectorNames('23%', 'State-1'));
-    list.add(VectorNames('33%', 'State-2'));
-    list.add(VectorNames('63%', 'State-3'));
-    list.add(VectorNames('73%', 'State-4'));
-    list.add(VectorNames('98%', 'State-5'));
+  Future<List<Name>> getStateNames() async {
+    List<Name> list = <Name>[];
+    list.add(Name(25, 'State-1'));
+    list.add(Name(35, 'State-2'));
+    list.add(Name(65, 'State-3'));
+    list.add(Name(75, 'State-4'));
+    list.add(Name(100, 'State-5'));
+    return list;
+  }
+  Future<List<Segment>> getBoldLines() async {
+    List<Segment> list = <Segment>[];
+    list.add(Segment(0, 25));
+    list.add(Segment(25, 10));
+    list.add(Segment(35, 30));
+    return list;
+  }
+  Future<List<Timestamp>> getTimestamps() async {
+    String dt = DateTime.now().millisecondsSinceEpoch.toString();
+    List<Timestamp> list = <Timestamp>[];
+    list.add(Timestamp(25, dt));
+    list.add(Timestamp(35, dt));
+    list.add(Timestamp(65, dt));
+    list.add(Timestamp(75, dt));
+    return list;
+  }
+  Future<List<Timeline>> getTimelines() async {
+    List<Timeline> list = <Timeline>[];
+    list.add(Timeline('id_1', 'Object Name 1', await getGrayLines(), await getGrayDots(), await getStateNames(), await getBoldLines(), await getTimestamps()));
+    list.add(Timeline('id_2', 'Object Name 2', await getGrayLines(), await getGrayDots(), await getStateNames(), await getBoldLines(), await getTimestamps()));
+    list.add(Timeline('id_3', 'Object Name 3', await getGrayLines(), await getGrayDots(), await getStateNames(), await getBoldLines(), await getTimestamps()));
     return list;
   }
 }

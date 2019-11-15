@@ -1,4 +1,4 @@
-//import 'dart:core';
+import 'dart:core';
 import 'dart:async';
 import 'dart:html';
 import 'package:angular/angular.dart';
@@ -6,9 +6,10 @@ import 'package:angular_components/angular_components.dart';
 
 import 'timeline_list_service.dart';
 import '../timeline_elem/timeline_elem_component.dart';
-import '../timeline_base/vector_seg.dart';
-import '../timeline_base/vector_dot.dart';
-import '../timeline_base/vector_names.dart';
+import '../timeline_base/segment.dart';
+import '../timeline_base/dot.dart';
+import '../timeline_base/name.dart';
+import '../timeline_base/timeline.dart';
 
 @Component(
   selector: 'timeline-list',
@@ -28,37 +29,40 @@ import '../timeline_base/vector_names.dart';
 class TimelineListComponent implements OnInit {
   final TimelineListService timelineListService;
 
-  List<VectorSeg> grayLines = [];
-  List<VectorDot> grayDots = [];
-  List<VectorNames> stateNames = [];
+  List<Timeline> timelines = [];
 
   List<String> items = [];
-  List<VectorSeg> items3 = [];
-  List<String> timelineElements = ['1', '2', '3'];
+  List<Segment> items3 = [];
+  //List<String> timelineElements = ['1', '2', '3'];
   var ws;
   TimelineListComponent(this.timelineListService);
 
   @override
   Future<Null> ngOnInit() async {
-    grayLines = await timelineListService.getGrayLines();
-    grayDots = await timelineListService.getGrayDots();
-    stateNames = await timelineListService.getStateNames();
+    timelines = await timelineListService.getTimelines();
+
+    ws = WebSocket('ws://localhost:8082');
+    /*
+    // WebSockets
     ws = WebSocket('ws://localhost:8082');
     ws.onMessage.listen((e) {
       items.add(e.data);
     });
-    callfunc();
+    */
+    timelines.elementAt(1).grayDots.elementAt(3).x = 0;
+    timerFunc();
   }
 
-  void callfunc() {
-    var p = () {
-      //grayLines.add(VectorSeg(11, 11));
-      print('123');
+  void timerFunc() {
+    var cb = () {
+      var d = timelines.elementAt(1).grayDots;
+      d.elementAt(3).x = d.elementAt(3).x + 0.1;
+      if (d.elementAt(3).x < 95) {
+        timerFunc();
+      }
     };
-    //grayLines.add(VectorSeg(10, 10));
-    var timer = Timer(Duration(seconds: 1), p);
+    var timer = Timer(Duration(milliseconds: 40), cb);
     //timer.cancel();
   }
-
-  //String remove(int index) => items.removeAt(index);
+  // String remove(int index) => items.removeAt(index);
 }

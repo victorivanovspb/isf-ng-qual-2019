@@ -1,15 +1,21 @@
-<svg width="100%" height="100%" style="overflow: visible;">
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        version="1.1"
+        width="100%"
+        height="100%"
+        style="overflow: visible;">
     <rect
             *ngFor="let line of grayLines"
-            [attr.x]="line.begin"
-            [attr.width]="line.end"
+            [attr.x]="line.beginPosition"
+            [attr.width]="line.endPosition"
             y="50%"
             height="2"
             fill="#ccc">
     </rect>
     <rect
             *ngFor="let dot of grayDots"
-            [attr.x]="dot.x"
+            [attr.x]="dot.positionX"
             y="50%"
             height="5%"
             width="3"
@@ -17,39 +23,34 @@
     </rect>
     <text
             *ngFor="let name of stateNames"
-            [attr.x]="name.x"
+            [attr.x]="name.shiftedPositionX"
             y="38%"
-            fill="#999"
+            fill="#777"
             style="font-size: 0.8em;">
-                {{ name.name }}
+        {{ name.name }}
     </text>
     <text
-            *ngFor="let name of stateNames"
-            [attr.x]="name.x"
+            *ngFor="let ts of timestamps"
+            [attr.x]="ts.shiftedPositionX"
             y="69%"
-            fill="#999"
-            style="font-size: 0.8em;">
-        {{ name.name }}
+            fill="#777"
+            style="font-size: 0.7em;">
+        {{ ts.time }}
     </text>
     <text
-            *ngFor="let name of stateNames"
-            [attr.x]="name.x"
+            *ngFor="let ts of timestamps"
+            [attr.x]="ts.shiftedPositionX"
             y="80%"
-            fill="#999"
-            style="font-size: 0.8em;">
-        {{ name.name }}
+            fill="#777"
+            style="font-size: 0.7em;">
+        {{ ts.date }}
     </text>
-</svg>
-
-<!--
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100" fill="#eee" style="">
-    <style>
-        .small { font: italic 12px sans-serif; }
-    </style>
-    <rect width="100%" height="10" fill="#ccc"></rect>
-    <rect *ngFor="let line of grayLines">
-        <rect x="{{ line.begin() }}" y="50%" width="{{ line.end() }}" height="10" fill="#ccc"></rect>
+    <rect
+            *ngFor="let line of boldLines"
+            [attr.x]="line.beginPosition"
+            [attr.width]="line.endPosition"
+            y="50%"
+            height="2"
+            fill="#00abff">
     </rect>
-    <text x="40%" y="38" class="small" fill="blue">{{value.begin()}}</text>
 </svg>
--->
