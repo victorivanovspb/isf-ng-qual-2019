@@ -51,9 +51,9 @@ class TimelineListComponent implements OnInit {
 
   void timerFunc() {
     var cb = () {
-      var d = timelines.elementAt(1).grayDots;
-      d.elementAt(3).x = d.elementAt(3).x + 0.1;
-      if (d.elementAt(3).x < 95) {
+      var d = timelines.elementAt(0).grayDots;
+      d.elementAt(0).x = d.elementAt(0).x + 0.1;
+      if (d.elementAt(0).x < 95) {
         timerFunc();
       }
     };

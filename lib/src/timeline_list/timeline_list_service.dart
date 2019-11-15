@@ -33,7 +33,6 @@ class TimelineListService {
   }
   Future<List<Timeline>> getTimelines() async {
     List<Timeline> list = <Timeline>[];
-    list.add(Timeline('id_3', 'Object Name 3', await getGrayLines(), await getGrayDots(), await getStateNames(), await getBoldLines(), await getTimestamps()));
     return list;
   }
 
