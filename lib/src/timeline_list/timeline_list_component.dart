@@ -7,10 +7,7 @@ import 'package:angular_components/angular_components.dart';
 import 'timeline_list_service.dart';
 import '../timeline_elem/timeline_elem_component.dart';
 import '../timeline_base/timeline.dart';
-import '../timeline_base/builder.dart';
-// import '../timeline_base/segment.dart';
-// import '../timeline_base/dot.dart';
-// import '../timeline_base/name.dart';
+import '../builder/builder.dart';
 
 @Component(
   selector: 'timeline-list',
@@ -37,16 +34,13 @@ class TimelineListComponent implements OnInit {
 
   @override
   Future<Null> ngOnInit() async {
-    timelines = await timelineListService.getTimelines();
+    timelines = timelineListService.getTimelines();
 
     ws = WebSocket('ws://localhost:8082');
     ws.onMessage.listen((e) {
-      print('ws onmessage');
+      // print('ws onmessage');
       timelineListService.parseIncomingStateData(timelines, builders, e.data);
     });
-
-    // timelines.elementAt(1).grayDots.elementAt(3).x = 0;
-    timerFunc();
   }
 
   void timerFunc() {
@@ -60,5 +54,4 @@ class TimelineListComponent implements OnInit {
     var timer = Timer(Duration(milliseconds: 40), cb);
     //timer.cancel();
   }
-  // String remove(int index) => items.removeAt(index);
 }

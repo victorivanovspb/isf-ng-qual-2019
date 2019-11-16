@@ -6,38 +6,12 @@ import '../timeline_base/dot.dart';
 import '../timeline_base/name.dart';
 import '../timeline_base/timeline.dart';
 import '../timeline_base/timestamp.dart';
-import '../timeline_base/builder.dart';
+import '../builder/builder.dart';
 import '../timeline_base/state.dart';
 
 @Injectable()
 class TimelineListService {
-  Future<List<Segment>> getGrayLines() async {
-    List<Segment> list = <Segment>[];
-    return list;
-  }
-  Future<List<Dot>> getGrayDots() async {
-    List<Dot> list = <Dot>[];
-    return list;
-  }
-  Future<List<Name>> getStateNames() async {
-    List<Name> list = <Name>[];
-    return list;
-  }
-  Future<List<Segment>> getBoldLines() async {
-    List<Segment> list = <Segment>[];
-    return list;
-  }
-  Future<List<Timestamp>> getTimestamps() async {
-    List<Timestamp> list = <Timestamp>[];
-    return list;
-  }
-  Future<List<Timeline>> getTimelines() async {
-    List<Timeline> list = <Timeline>[];
-    return list;
-  }
-
-  Future parseIncomingStateData(List<Timeline> timelines, List<Builder> builders, String data) async {
-    print('service: parse state data');
+  parseIncomingStateData(List<Timeline> timelines, List<Builder> builders, String data) {
     Map stateJson = jsonDecode(data);
     String m = stateJson['method'];
     String pTime = stateJson['params']['timestamp'];
@@ -47,20 +21,44 @@ class TimelineListService {
     String iProgress = stateJson['params']['items']['progress'];
     State state = State(m, pName, pId, pTime, iState, iProgress);
 
-    print('for timelines');
-    for (var item in timelines) {
-      print(' name=' + item.name + ' id=' + item.id);
+    for (var builder in builders) {
+      if (builder.id == state.oId) {
+        builder.addState(state);
+        return;
+      }
     }
-
-    Timeline tl = await initNewTimeline(timelines, pId, pName);
-    builders.add(Builder(tl, state));
-
-    // заглушка
-    timelines.add(tl);
+    Timeline timeline = initNewTimeline(timelines, state.oId, state.oName);
+    builders.add(Builder(timeline, state));
+    timelines.add(timeline);
   }
 
-  Future<Timeline> initNewTimeline(List<Timeline> timelines, id, name) async {
-    return Timeline(id, name, await getGrayLines(), await getGrayDots(), await getStateNames(), await getBoldLines(), await getTimestamps());
+  Timeline initNewTimeline(List<Timeline> timelines, id, name) {
+    return Timeline(id, name, getGrayLines(), getGrayDots(), getStateNames(), getBoldLines(), getTimestamps());
+  }
+
+  List<Segment> getGrayLines() {
+    List<Segment> list = <Segment>[];
+    list.add(Segment(0, 100));
+    return list;
+  }
+  List<Dot> getGrayDots() {
+    List<Dot> list = <Dot>[];
+    return list;
+  }
+  List<Name> getStateNames() {
+    List<Name> list = <Name>[];
+    return list;
+  }
+  List<Segment> getBoldLines() {
+    List<Segment> list = <Segment>[];
+    return list;
+  }
+  List<Timestamp> getTimestamps() {
+    List<Timestamp> list = <Timestamp>[];
+    return list;
+  }
+  List<Timeline> getTimelines() {
+    List<Timeline> list = <Timeline>[];
+    return list;
   }
 }
-

@@ -27,10 +27,16 @@ class State {
   String get timestamp {
     return this._timestamp;
   }
+  int get timestampNum {
+    return int.parse(this._timestamp);
+  }
   String get iState {
     return this._iState;
   }
   String get iProgress {
     return this._iProgress;
+  }
+  double get iProgressNum {
+    return double.parse(this._iProgress.split('%')[0]);
   }
 }
