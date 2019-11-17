@@ -1,15 +1,11 @@
-import 'package:isf_ng_qual_2019/src/builder/current_segment.dart';
-
 import '../timeline_base/timeline.dart';
 import '../timeline_base/state.dart';
-
 import '../timeline_base/segment.dart';
 import '../timeline_base/dot.dart';
 import '../timeline_base/name.dart';
 import '../timeline_base/timestamp.dart';
-
-import './full_segment.dart';
-// import './pair.dart';
+import '../timeline_base/full_segment.dart';
+import '../timeline_base/current_segment.dart';
 
 class Builder {
   Timeline _timeline;
@@ -33,6 +29,7 @@ class Builder {
     return this._state.oName;
   }
 
+  /// Метод 'addState' осуществляет пересчет интервалов состояний и относительных координат отрисовываемых элементов.
   addState(State state) {
     if (!this._current.mode) {
       this._current.setModeOn();
@@ -53,19 +50,16 @@ class Builder {
     this._timeline.grayLines.add(Segment(0, 100));
 
     if (this._segments.isEmpty) {
-
       this._timeline.stateNames.add(Name(100, state.iState));
       this._timeline.boldLines.add(Segment(0, this._current.currentProgress));
 
     } else {
-      // this._current.deltaTime.toString();
       int beg = this._segments[0].begin;
       int end = this._current.mode ? this._current.endTimestamp : this._segments[this._segments.length - 1].end;
-      int len = end - beg;
       double pos1 = 0;
       double pos2 = 0;
       for (var seg in this._segments) {
-        pos2 = pos1 + ((seg.end - seg.begin) / len) * 100;
+        pos2 = pos1 + ((seg.end - seg.begin) / (end - beg)) * 100;
         this._timeline.stateNames.add(Name(pos2, seg.name));
         this._timeline.boldLines.add(Segment(pos1, pos2 - pos1));
         this._timeline.grayDots.add(Dot(pos2));
@@ -88,7 +82,8 @@ class Builder {
     this._timeline.boldLines.clear();
     this._timeline.timestamps.clear();
   }
-  // заглушка-инициализатор
+
+  /// заглушка-инициализатор
   init(timestamp, stateName, progress){
     this._timeline.grayLines.add(Segment(0, 100));
     this._timeline.grayDots.add(Dot(100));

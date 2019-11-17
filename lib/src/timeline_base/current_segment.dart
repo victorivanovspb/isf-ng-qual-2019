@@ -1,4 +1,4 @@
-import './pair.dart';
+import 'pair.dart';
 
 class CurrentSegment {
   bool _isActive;
@@ -54,22 +54,20 @@ class CurrentSegment {
       return 0;
     }
     if (this._mass.length == 1) {
-     var pr = (this._mass[0].timestamp - this.beginTimestamp) / this._mass[0].progress;
-     print('prog::' + pr.toString());
-     return pr;
+     return (this._mass[0].timestamp - this.beginTimestamp) / this._mass[0].progress;
     }
 
-    List<double> dm = <double>[];
+    List<double> massDelta = <double>[];
     for (var i = 1; i < this._mass.length; i += 1) {
       var p1 = this._mass[i - 1];
       var p2 = this._mass[i];
-      dm.add((p2.timestamp - p1.timestamp) / (p2.progress - p1.progress ));
+      massDelta.add((p2.timestamp - p1.timestamp) / (p2.progress - p1.progress ));
     }
     double sum = 0;
-    for (double v in dm) {
-      sum += v;
+    for (double delta in massDelta) {
+      sum += delta;
     }
-    return sum / dm.length;
+    return sum / massDelta.length;
   }
 
   get complete {

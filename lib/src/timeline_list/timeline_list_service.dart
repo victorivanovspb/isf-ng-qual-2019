@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 import 'package:angular/core.dart';
 import '../timeline_base/segment.dart';
@@ -6,8 +5,8 @@ import '../timeline_base/dot.dart';
 import '../timeline_base/name.dart';
 import '../timeline_base/timeline.dart';
 import '../timeline_base/timestamp.dart';
-import '../builder/builder.dart';
 import '../timeline_base/state.dart';
+import '../timeline_builder/builder.dart';
 
 @Injectable()
 class TimelineListService {
@@ -42,23 +41,18 @@ class TimelineListService {
     return list;
   }
   List<Dot> getGrayDots() {
-    List<Dot> list = <Dot>[];
-    return list;
+    return <Dot>[];
   }
   List<Name> getStateNames() {
-    List<Name> list = <Name>[];
-    return list;
+    return <Name>[];
   }
   List<Segment> getBoldLines() {
-    List<Segment> list = <Segment>[];
-    return list;
+    return <Segment>[];
   }
   List<Timestamp> getTimestamps() {
-    List<Timestamp> list = <Timestamp>[];
-    return list;
+    return <Timestamp>[];
   }
   List<Timeline> getTimelines() {
-    List<Timeline> list = <Timeline>[];
-    return list;
+    return <Timeline>[];
   }
 }

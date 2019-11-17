@@ -3,11 +3,10 @@ import 'dart:async';
 import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-
 import 'timeline_list_service.dart';
 import '../timeline_elem/timeline_elem_component.dart';
 import '../timeline_base/timeline.dart';
-import '../builder/builder.dart';
+import '../timeline_builder/builder.dart';
 
 @Component(
   selector: 'timeline-list',
@@ -38,20 +37,7 @@ class TimelineListComponent implements OnInit {
 
     ws = WebSocket('ws://localhost:8082');
     ws.onMessage.listen((e) {
-      // print('ws onmessage');
       timelineListService.parseIncomingStateData(timelines, builders, e.data);
     });
-  }
-
-  void timerFunc() {
-    var cb = () {
-      var d = timelines.elementAt(0).grayDots;
-      d.elementAt(0).x = d.elementAt(0).x + 0.1;
-      if (d.elementAt(0).x < 95) {
-        timerFunc();
-      }
-    };
-    var timer = Timer(Duration(milliseconds: 40), cb);
-    //timer.cancel();
   }
 }
