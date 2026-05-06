@@ -39,7 +39,7 @@ webdev serve
 ```
 
 ### Серверная часть
-Серверная часть доступна в отдельном Github-репозитории: [isf-ws-qual-2019](https://github.com/victorivanovspb/isf-ws-qual-2019)
+Mock-сервер доступен в отдельном Github-репозитории: [isf-ws-qual-2019](https://github.com/victorivanovspb/isf-ws-qual-2019)
 
 ### Внутренее устройство
 Веб-приложение использует [AngularDart](https://webdev.dartlang.org/angular) и [AngularDart Components](https://webdev.dartlang.org/components)
